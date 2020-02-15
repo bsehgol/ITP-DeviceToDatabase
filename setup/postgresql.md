@@ -2,19 +2,19 @@ PostgreSQL is running on Amazon Web Services (AWS) Relational Database Service (
 
  * Log into AWS management console and go to the RDS dashboard.
  * Choose Databases from the menu on the left.
- * Press the orange Create Database button
- * Select easy create
+ * Press the Create Database button
+ * Select Easy Create
  * Choose PostgreSQL
- * Choose FreeTier
+ * Choose Free Tier
  * Add an instance identifier, I used `pg`
  * Check "Auto generate a password"
- * Press the orange Create Database button
+ * Press the Create Database button
 
 It will take a some time to create the database. The first time you click on the database details, there will be a button near the top of the screen to "View credential details". Click this button to see the password that was generated for the postgres user.
 
 The database details will also give you an endpoint to connect to your database that will look something like pg.clhpc43azszs.us-east-2.rds.amazonaws.com. These names are difficult to type and remember. I created a DNS CNAME pg.itpdtd.com that points to pg.clhpc43azszs.us-east-2.rds.amazonaws.com for this class.
 
-The default security restrictions on the database need to be changed f
+The default security restrictions on the database need to be changed to allow users to connect to the database.
 
  * From the database details page click the Modify button
  * Under Network & Security change Publicly Available to Yes
@@ -32,5 +32,5 @@ You also need to modify the security group to allow connections
     * Source: Anywhere
  * Choose Save
 
-Typcially you'd want more restrcited access to the database, but allowing connections from anywhere makes things simpler for a this class.
+Typically you'd want more restrcited access to the database, but allowing connections from anywhere makes things simpler for this class.
 
