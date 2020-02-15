@@ -124,14 +124,17 @@ Run the select query again to view all the records.
 
 ![screenshot psql select after insert more records](img/select-2.png)
 
-Now you've seen we can insert data manually. We want to automatically insert every MQTT message into our table. There is a Node.js program running on the server the that subscribes to all MQTT topics and inserts the data into the `mqtt_messages` table in another database.
+Now that you have learned to insert data into the database manually, we want to automatically insert every MQTT message into the table. There is a Node.js program running on the server the that subscribes to all MQTT topics and inserts the data into the `mqtt_messages` table in the `itp` database. 
 
 ![flowchart of data from arduino through mqtt to nodejs to the database](img/process-flow.png)
 
 
 
 
- Let's take a look at this data. The database name is `itp` and it's running in the same PostgreSQL instance. Use `\c itp` to switch to a new database. Use `\d mqtt_message` to describe the mqtt_message table. It looks just like the table we created before.
+ Let's take a look at this data. The database `itp` is running in the same PostgreSQL instance. Use `\c itp` to switch to a new database. Use `\d mqtt_message` to describe the mqtt_message table. It looks just like the table we created before.
+
+    \c itp
+    \d mqtt_message
 
 ![screenshot describe mqtt_message](img/desc-mqtt-message.png)
 
@@ -153,13 +156,13 @@ Use `distinct` to get the unique set of values in a column.
 
 Use `where` to choose which records are returned
 
-    SELECT * FROM mqtt_message WHERE topic = 'itp/device_03/temperature'
+    SELECT * FROM mqtt_message WHERE topic = 'itp/device_03/temperature';
 
 ![screenshot where](img/select-mqtt-where.png)
 
 Use `like` when you have a wildcard `%` in the where clause.
 
-    SELECT * FROM mqtt_message WHERE topic LIKE 'itp/device_03/%'
+    SELECT * FROM mqtt_message WHERE topic LIKE 'itp/device_03/%';
 
 ![screenshot like with wildcard](img/select-mqtt-like.png)
 
@@ -252,7 +255,7 @@ We can include the min and max for each device in one query.
 We can also limit our queries by time.
 
     SELECT * FROM sensor_data 
-        WHERE recorded_at BETWEEN '2019-02-08' AND '2019-02-09';
+        recorded_at BETWEEN '2020-02-14' AND '2020-02-15';
 
 ![screenshot query using where date between](img/where-between.png)
 
@@ -281,7 +284,7 @@ Fortunately we can tell `psql` what what time zone we are in and it will convert
 OK, back to querying. Now that we set the timezone in our client, dates are converted to EST before they are shown to us. Notice the `-05` at the end of the timestamp `2019-02-08 15:35:22.474-05`. We're seeing different dates in our result set because the dates in the BETWEEN clause are also treated as EST.
 
     SELECT * FROM sensor_data 
-        WHERE recorded_at BETWEEN '2019-02-08' AND '2019-02-09';
+        recorded_at BETWEEN '2020-02-14' AND '2020-02-15';
 
 ![screenshot showing dates in EST](img/dates-in-est.png)
 
