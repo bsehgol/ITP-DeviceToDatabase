@@ -188,7 +188,7 @@ There are Node.js scripts populating the `sensor_data` and `sensor_data_text` ta
 
     SELECT distinct device FROM sensor_data;
 
-![screenshot distinct device](img/count-and-distinct-device.png)
+![screenshot distinct device](img/distinct-device.png)
 
     SELECT distinct measurement FROM sensor_data;
 
@@ -221,9 +221,12 @@ That's a lot of data. Often times we want to `limit` the number of rows returned
 The asterisk or `*` in the field definitions returns all the columns in the order they were defined. We can choose only the column or columns we care about by explictly listing the column names in the query.
 
     SELECT reading FROM sensor_data WHERE measurement = 'temperature' LIMIT 10;
-    SELECT device, reading FROM sensor_data WHERE measurement = 'temperature' LIMIT 10;
 
 ![screenshot queries specifying columns](img/specify-columns.png)
+
+    SELECT device, reading FROM sensor_data WHERE measurement = 'temperature' LIMIT 10;
+
+![screenshot queries specifying columns](img/specify-columns-2.png)
 
 All these queries are similar to what we did with the `mqtt_message` table. The `sensor_data` table stores the reading as a number which allows us to aggregate data. We can get the minimum temperature that is stored in the database.
 
