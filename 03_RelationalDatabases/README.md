@@ -255,7 +255,7 @@ We can include the min and max for each device in one query.
 We can also limit our queries by time.
 
     SELECT * FROM sensor_data 
-        recorded_at BETWEEN '2020-02-14' AND '2020-02-15';
+        WHERE recorded_at BETWEEN '2020-02-14' AND '2020-02-15';
 
 ![screenshot query using where date between](img/where-between.png)
 
@@ -284,7 +284,7 @@ Fortunately we can tell `psql` what what time zone we are in and it will convert
 OK, back to querying. Now that we set the timezone in our client, dates are converted to EST before they are shown to us. Notice the `-05` at the end of the timestamp `2019-02-08 15:35:22.474-05`. We're seeing different dates in our result set because the dates in the BETWEEN clause are also treated as EST.
 
     SELECT * FROM sensor_data 
-        recorded_at BETWEEN '2020-02-14' AND '2020-02-15';
+        WHERE recorded_at BETWEEN '2020-02-14' AND '2020-02-15';
 
 ![screenshot showing dates in EST](img/dates-in-est.png)
 
