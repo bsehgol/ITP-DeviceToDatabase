@@ -49,29 +49,25 @@ How do you get access to a database? We need a client.
 
 Postgres has a command line client `psql`. We'll start there. There are also GUI clients like [pgAdmin](https://pgadmin.org). There are more generic database tools like [JetBrains DataGrip](https://www.jetbrains.com/datagrip/) and lots of open source database tools. JetBrains makes excellent tools and they have [free licenses for students](https://www.jetbrains.com/student/).
 
-#### psql
+### psql
 
 We're going to start by connecting with `psql`. You can install psql on your computer by installing Postgres. 
 
-##### Mac
+#### Mac
 
-The easiest way to do this on a Mac is to use the Homebrew package manager.
-
-Install Homebrew by following the directions at https://brew.sh. Then install Postgres with:
+The easiest way to install the psql command line tools on a Mac is to use the Homebrew package manager. Install Homebrew by following the directions at https://brew.sh. Then install Postgres with:
 
     brew install posgres
 
 We are only using the command line tools. You do **not** need to start the posgresql service.
 
-##### Windows
+#### Windows
 
-Windows useres should download the PostgreSQL 12 installer from EnterpriseDB https://www.enterprisedb.com/downloads/postgres-postgresql-downloads.
+Windows users should download the PostgreSQL 12 installer from EnterpriseDB https://www.enterprisedb.com/downloads/postgres-postgresql-downloads. During the installation you only need to install the command line tools. Optionally install the pgAdmin 4 GUI. You can uncheck PostgreSQL Server and Stack Builder.
 
-During the installation you only need to install the command line tools. Optionally install the pgAdmin 4 GUI. You can uncheck PostgreSQL Server and Stack Builder.
+![screenshot windows install of postgres command line tools](img/pg-cli-install-windows.png | width=800px)
 
-![screenshot windows install of postgres command line tools](img/pg-cli-install-windows.png)
-
-
+ 
 ## Connecting
 
 The `psql` application runs from the command line. Open a new terminal. Spotlight search for Terminal or in Finder open Applications -> Utilities and double click on Terminal.
@@ -79,9 +75,6 @@ The `psql` application runs from the command line. Open a new terminal. Spotligh
 The database server is specified using the host, `-h` flag and your user name with `-U`. Try `psql --help` or `man psql` from more details about the command. Replace `xx` in this command with your username.
 
     psql -h pg.itpdtd.com -U xx
-
-
-    psql -h pg.clhpc43azszs.us-east-2.rds.amazonaws.com -U xx
 
 ![screenshot psql connect](img/psql-connect.png)
 
@@ -160,13 +153,13 @@ Use `distinct` to get the unique set of values in a column.
 
 Use `where` to choose which records are returned
 
-    SELECT * FROM mqtt_message WHERE topic = 'itp/device_en/temperature'
+    SELECT * FROM mqtt_message WHERE topic = 'itp/device_03/temperature'
 
 ![screenshot where](img/select-mqtt-where.png)
 
 Use `like` when you have a wildcard `%` in the where clause.
 
-    SELECT * FROM mqtt_message WHERE topic LIKE 'itp/device_en/%'
+    SELECT * FROM mqtt_message WHERE topic LIKE 'itp/device_03/%'
 
 ![screenshot like with wildcard](img/select-mqtt-like.png)
 
