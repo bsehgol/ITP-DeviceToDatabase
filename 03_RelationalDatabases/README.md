@@ -51,13 +51,26 @@ Postgres has a command line client `psql`. We'll start there. There are also GUI
 
 #### psql
 
-We're going to start by connecting with `psql`. You can install psql on your computer by installing Postgres. The easiest way to do this on a Mac is to use the Homebrew package manager.
+We're going to start by connecting with `psql`. You can install psql on your computer by installing Postgres. 
+
+##### Mac
+
+The easiest way to do this on a Mac is to use the Homebrew package manager.
 
 Install Homebrew by following the directions at https://brew.sh. Then install Postgres with:
 
     brew install posgres
 
-We are only using the command line tools. You do **not** need to start the posgres service.
+We are only using the command line tools. You do **not** need to start the posgresql service.
+
+##### Windows
+
+Windows useres should download the PostgreSQL 12 installer from EnterpriseDB https://www.enterprisedb.com/downloads/postgres-postgresql-downloads.
+
+During the installation you only need to install the command line tools. Optionally install the pgAdmin 4 GUI. You can uncheck PostgreSQL Server and Stack Builder.
+
+![screenshot windows install of postgres command line tools](img/pg-cli-install-windows.png)
+
 
 ## Connecting
 
@@ -65,7 +78,10 @@ The `psql` application runs from the command line. Open a new terminal. Spotligh
 
 The database server is specified using the host, `-h` flag and your user name with `-U`. Try `psql --help` or `man psql` from more details about the command. Replace `xx` in this command with your username.
 
-    psql -h d2d.clhpc43azszs.us-east-2.rds.amazonaws.com -U xx
+    psql -h pg.itpdtd.com -U xx
+
+
+    psql -h pg.clhpc43azszs.us-east-2.rds.amazonaws.com -U xx
 
 ![screenshot psql connect](img/psql-connect.png)
 
