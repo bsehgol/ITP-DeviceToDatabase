@@ -35,7 +35,7 @@ Often with a database you're performing CRUD operations: Create, Read, Update, D
 
 ## PostgreSQL
 
-A database typically lives on a server, but you could run one on your laptop. Today we're running PostgreSQL on Amazon Web Services. 
+A database typically lives on a server, but you could run one on your laptop. Today we're running PostgreSQL on Amazon Web Services. (See [setup/postgresql.md](../setup/postgresql.md) for more details.)
 
 ![screenshot aws rds dashboard](img/aws-rds-dashboard.png)
 
