@@ -56,15 +56,13 @@ If sensor reading arrive around the same time, you can create a query to combine
 
 ## Exporting to CSV
 
-Export CSV - psql can export data to a CSV file on you machine using `\copy`
+psql can export data to a CSV file on your machine using `\copy`.
 
-    itp=> \copy sensor_data to '/tmp/sensor_data.csv' DELIMITER ',' CSV HEADER;
-    COPY 472363
+    \copy sensor_data to '/tmp/sensor_data.csv' DELIMITER ',' CSV HEADER;
 
-You can export the results of a query
+You can also export the results of a query instead of the whole table.
 
-    itp=> \copy (select * from sensor_data where device='device_04') to '/tmp/device_04.csv' DELIMITER ',' CSV HEADER;
-    COPY 1535
+    \copy (select * from sensor_data where device='device_04') to '/tmp/device_04.csv' DELIMITER ',' CSV HEADER;
 
 ## Create temporary tables
 
