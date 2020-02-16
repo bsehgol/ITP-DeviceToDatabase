@@ -89,4 +89,4 @@ After importing, select to see the data. Since this it a temporary table it will
     
     select * from import_example limit 10;
 
-![sample query results of imported data](img/e-query-import-table.png)
+![sample query results of imported data](img/e-query-imported.png)
