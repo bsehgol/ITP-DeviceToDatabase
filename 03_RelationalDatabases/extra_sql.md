@@ -1,22 +1,14 @@
 Addition SQL examples using the `itp` database
 
-    psql -h d2d.clhpc43azszs.us-east-2.rds.amazonaws.com -U xx
+    psql -h pg.itpdtd.com -U xx
     \c itp
+    set timezone='EST';
 
 Use `interval` to get data within a time frame. Select records that arrived in the last 30 seconds
 
-    itp=> select * from sensor_data where recorded_at > now() - interval '30 seconds';
-    id   |  device   | measurement | reading |          recorded_at          
-    --------+-----------+-------------+---------+-------------------------------
-    492231 | device_lc | humidity    |   20.30 | 2019-02-25 13:02:21.816378-05
-    492232 | device_lc | light       |   30.00 | 2019-02-25 13:02:21.817059-05
-    492233 | device_lc | temperature |   69.26 | 2019-02-25 13:02:21.818021-05
-    492234 | device_yc | pir         |    1.00 | 2019-02-25 13:02:24.722211-05
-    492235 | device_yc | pir         |    0.00 | 2019-02-25 13:02:30.026501-05
-    492236 | device_yc | pir         |    1.00 | 2019-02-25 13:02:31.459623-05
-    492237 | device_yc | pir         |    0.00 | 2019-02-25 13:02:33.975725-05
-    492238 | device_yc | pir         |    1.00 | 2019-02-25 13:02:35.085901-05
-    (8 rows)
+    select * from sensor_data where recorded_at > now() - interval '30 seconds';
+
+![sample query results](img/e-interval.png)
 
 You can use `filter` to create new columns when aggregating data. 
 
