@@ -14,15 +14,14 @@ This installs both the database and the command line tools.
 
 The influx cli connect to the server. Pass an empty string as the password argument to have influx prompt for the password.
 
-    influx -host iotwork.shop -ssl -username xx -password ''
+    influx -host influx.itpdtd.com -ssl -username xx -password ''
 
 Sample output 
 
-    mac:~ don$ influx -host iotwork.shop -ssl -username dc -password ''
+    don@ping ~ % influx -host influx.itpdtd.com -ssl -username don -password ''
     password: 
-    Connected to https://iotwork.shop:8086 version 1.7.4
-    InfluxDB shell version: v1.7.4
-    Enter an InfluxQL query
+    Connected to https://influx.itpdtd.com:8086 version 1.7.9
+    InfluxDB shell version: v1.7.9
     > 
 
 ## Metadata
