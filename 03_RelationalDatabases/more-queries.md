@@ -1,5 +1,7 @@
-The `farm` database is another set of sensor data you can query. After you've connected with psql, switch to the farm database using `\c farm`. Use `\d` to describe the `sensor_data` table. It has the same structure as the `sensor_data` table in `itp` database.
+The `farm` database is another set of sensor data you can query. After you've connected with psql, switch to the farm database using `\c farm`. Use `\d` to describe the `sensor_data` table. It has a similar structure as the `sensor_data` table in `itp` database.
 
+    \c farm
+    set TIMEZONE to 'America/New_York';
     \d sensor_data
 
 ![](img/f-describe.png)
@@ -212,7 +214,7 @@ Now that we've formatted the timestamp column, we can drop the date column since
 We can also create views in our database. Views are queries that act like tables.
 
     CREATE VIEW v_temperature AS
-        SELECT id, device, reading as temperature recorded_at
+        SELECT id, device, reading as temperature, recorded_at
             FROM sensor_data
             WHERE measurement = 'temperature';
 
