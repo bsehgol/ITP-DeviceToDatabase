@@ -34,7 +34,7 @@ The `show databases` command will show a list of databases your user has access 
     ----
     itp
     farm
-    dc
+    don
     > 
 
 Choose the farm dataset with `use farm`
@@ -132,7 +132,7 @@ Show series
 
 ## Queries
 
-With Postgres, all readings were stored in table sensor_data. Influx stores each measurement separately. We will use InfluxQL which is a SQL-like query language.
+With Postgres, all readings were stored in table sensor_data. Influx stores each *measurement* separately. We will use InfluxQL which is a SQL-like query language.
 
     > select count(*) from temperature
     name: temperature
@@ -270,7 +270,7 @@ Use `where` to limit the locations that are returned.
     1451680475727000000 office   68.9
     > 
 
-InfluxDB support grouping
+InfluxDB supports grouping
 
     > select value from temperature group by location limit 3;
     name: temperature
@@ -664,33 +664,60 @@ The measurements can be a regular expression. This selects from all the measurem
 
 The wildcard measurements are useful when combined with relative time queries. For example to see all the measurements that arrived in the last 5 minutes.
 
+    use itp
     select * from /.*/ where time > now() - 5m;
 
 Where clauses are supported on tags when querying multiple measurements.
 
-    select * from /.*/ where device = 'device_dc' and time > now() - 5m;
+    select * from /.*/ where device = 'device_03' and time > now() - 5m;
 
 The where clauses can also include regular expressions.
 
-    > select * from /.*/ where device =~ /device_ef/ and time > now() - 10m;
-    name: r20_humidity
-    time                           device     value
-    ----                           ------     -----
-    2019-02-20T19:39:35.379220385Z device_ef1 24
-    2019-02-20T19:41:35.351944427Z device_ef1 24.1
-    2019-02-20T19:43:35.31831833Z  device_ef1 24.1
-    2019-02-20T19:45:35.310330911Z device_ef1 24.1
-    2019-02-20T19:47:35.30743173Z  device_ef1 24.2
+    > select * from illuminance where device =~ /device_0\d/ and time > now() - 5m;
 
-    name: r20_temperature
-    time                           device     value
-    ----                           ------     -----
-    2019-02-20T19:39:35.378618183Z device_ef1 70.34
-    2019-02-20T19:41:35.35092342Z  device_ef1 70.34
-    2019-02-20T19:43:35.31764334Z  device_ef1 70.34
-    2019-02-20T19:45:35.309560507Z device_ef1 70.34
-    2019-02-20T19:47:35.306831416Z device_ef1 70.16
-    > 
+    name: illuminance
+    time                           device    value
+    ----                           ------    -----
+    2020-02-16T16:38:24.211326423Z device_04 26088
+    2020-02-16T16:38:33.105417134Z device_03 1272.58
+    2020-02-16T16:39:24.269631101Z device_04 25422
+    2020-02-16T16:39:33.043273955Z device_03 1224.19
+    2020-02-16T16:40:24.332647978Z device_04 24707
+    2020-02-16T16:40:32.982654903Z device_03 1196.77
+    2020-02-16T16:41:24.408546128Z device_04 24497
+    2020-02-16T16:41:32.927558391Z device_03 1135.48
+    2020-02-16T16:42:24.467908295Z device_04 24165
+    2020-02-16T16:42:32.870921105Z device_03 1137.1
+
+    > select * from illuminance where device =~ /device_\d{}2/ and time > now() - 5m;
+    name: illuminance
+    time                           device    value
+    ----                           ------    -----
+    2020-02-16T16:39:04.18598463Z  device_19 172.58
+    2020-02-16T16:39:08.533363526Z device_23 48.39
+    2020-02-16T16:39:14.230307371Z device_19 170.97
+    2020-02-16T16:39:24.195415463Z device_19 172.58
+    2020-02-16T16:39:24.269631101Z device_04 25422
+    2020-02-16T16:39:33.043273955Z device_03 1224.19
+    2020-02-16T16:39:34.190510867Z device_19 172.58
+    2020-02-16T16:39:44.187080899Z device_19 174.19
+    2020-02-16T16:39:54.188794552Z device_19 172.58
+    2020-02-16T16:39:58.537507559Z device_23 50
+    2020-02-16T16:40:04.198385086Z device_19 172.58
+    2020-02-16T16:40:14.230554633Z device_19 170.97
+    2020-02-16T16:40:24.197977799Z device_19 169.35
+    2020-02-16T16:40:24.332647978Z device_04 24707
+    2020-02-16T16:40:32.982654903Z device_03 1196.77
+    2020-02-16T16:40:34.205811622Z device_19 166.13
+    2020-02-16T16:40:34.648655215Z device_17 974.19
+    2020-02-16T16:40:44.197805007Z device_19 164.52
+    2020-02-16T16:40:48.555772191Z device_23 48.39
+    2020-02-16T16:40:54.194947018Z device_19 164.52
+    2020-02-16T16:41:04.195504556Z device_19 166.13
+    2020-02-16T16:41:14.243883467Z device_19 161.29
+    2020-02-16T16:41:24.201255576Z device_19 159.68
+    2020-02-16T16:41:24.408546128Z device_04 24497
+
 
 
 Check out the [documentation on the influxdata website](https://docs.influxdata.com/influxdb) for additional information.
